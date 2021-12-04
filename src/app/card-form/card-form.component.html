@@ -1,20 +1,20 @@
-<form [formGroup]="cardForm">
-  <input formControlName="name" placeholder="Enter Your Name" />
-  <div
-    *ngIf="
-      cardForm.controls.name.touched &&
-      cardForm.controls.name.dirty &&
-      cardForm.controls.name?.errors?.required
-    "
-  >
-    Value is required
-  </div>
-  <div *ngIf="cardForm.controls.name?.errors?.minlength">
-    Value you entered is
-    {{ cardForm.controls.name?.errors?.minlength.actualLength }} characters
-    long, but it must be at least
-    {{ cardForm.controls.name?.errors?.minlength.requiredLength }} characters
-  </div>
+<form (ngSubmit)="onSubmitClick()" [formGroup]="cardForm">
+  <app-input label="Name" [control]="cardForm.controls.name"></app-input>
+  <app-input
+    label="Card Number"
+    [control]="cardForm.controls.cardNumber"
+  ></app-input>
+  <app-input
+    label="Expiration"
+    [control]="cardForm.controls.expiration"
+  ></app-input>
+  <app-input
+    label="Security Code"
+    [control]="cardForm.controls.securityCode"
+  ></app-input>
+  <button [disabled]="cardForm.invalid" class="button is-primary" type="submit">
+    Submit
+  </button>
 </form>
 <hr />
 
